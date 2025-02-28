@@ -14,6 +14,7 @@
 
 const char *powspec_ffmt_names[] = {
   "ASCII",
-  "FITS"
+  "FITS",
+  "BIGFILE",
 };
 

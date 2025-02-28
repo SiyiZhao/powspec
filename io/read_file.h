@@ -37,7 +37,8 @@
 
 typedef enum {
   POWSPEC_FFMT_ASCII = 0,
-  POWSPEC_FFMT_FITS = 1
+  POWSPEC_FFMT_FITS = 1,
+  POWSPEC_FFMT_BIGFILE = 2,
 } powspec_ffmt_t;
 
 extern const char *powspec_ffmt_names[];
@@ -88,5 +89,7 @@ int read_ascii_data(const char *fname, const size_t skip, const char comment,
     const char *fmtr, char *const *pos, const char *wc, const char *wfkp,
     const char *nz, const char *sel, const bool wt, DATA **data, size_t *num,
     double *sumw, double *I12, double *I22, const int verb);
+
+int read_bigfile(const char *fname, DATA **data, size_t *num, const int verb);
 
 #endif

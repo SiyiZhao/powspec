@@ -162,7 +162,8 @@ RAND_FORMAT     = \n\
     # Integer, same dimension as `DATA_CATALOG`.\n\
     # Allowed values are:\n\
     # * %d: ASCII text file;\n\
-    # * %d: FITS table.\n\
+    # * %d: FITS table;\n\
+    # * %d: BIGFILE format.\n\
 DATA_SKIP       = \n\
 RAND_SKIP       = \n\
     # Number of lines to be skipped for ASCII format input files (unset: %d).\n\
@@ -305,7 +306,7 @@ OVERWRITE       = \n\
 VERBOSE         = \n\
     # Boolean option, indicate whether to show detailed outputs (unset: %c).\n",
   DEFAULT_CONF_FILE, DEFAULT_FILE_FORMAT, POWSPEC_FFMT_ASCII,
-  POWSPEC_FFMT_FITS, DEFAULT_FILE_SKIP, DEFAULT_WT_COMP, DEFAULT_WT_FKP,
+  POWSPEC_FFMT_FITS, POWSPEC_FFMT_BIGFILE, DEFAULT_FILE_SKIP, DEFAULT_WT_COMP, DEFAULT_WT_FKP,
   DEFAULT_CONVERT ? 'T' : 'F', DEFAULT_CMVDST_ERR, POWSPEC_READ_COMMENT,
   DEFAULT_BOX_PAD, DEFAULT_PARTICLE_ASSIGN, POWSPEC_ASSIGN_NGP,
   POWSPEC_ASSIGN_CIC, POWSPEC_ASSIGN_TSC, POWSPEC_ASSIGN_PCS,
@@ -599,6 +600,8 @@ static int check_file_fmt(const cfg_t *cfg, const int num, const char *name,
 Please re-compile the code with option -DWITH_CFITSIO\n");
         return POWSPEC_ERR_CFG;
 #endif
+      case POWSPEC_FFMT_BIGFILE:
+        break;
       default:
         P_ERR("invalid " FMT_KEY(%s_FORMAT) ": %d\n", name, t);
         return POWSPEC_ERR_CFG;
