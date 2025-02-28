@@ -133,5 +133,13 @@
 /* k should vary the fastest to reduce cache miss. */
 #define IDX(Ng,i,j,k)      (((size_t) (i) * (Ng) + (j)) * (Ng) + (k))
 
+#define MY_ALLOC(ptr,type,n,msg) {                                        \
+  (ptr) = (type *) malloc(sizeof(type) * (n));                            \
+  if (!(ptr)) {                                                           \
+    fprintf(stderr, FMT_ERR "failed to allocate memory for " #msg ".\n"); \
+    return POWSPEC_ERR_MEMORY;                                                       \
+  }                                                                       \
+}
+
 #endif
 

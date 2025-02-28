@@ -130,6 +130,19 @@ CATA *read_cata(const CONF *conf) {
       return NULL;
     }
 #endif
+    else if (ftype == POWSPEC_FFMT_BIGFILE) {
+      if (read_bigfile(conf->dfname[i], cat->data + i,
+        cat->ndata + i, conf->verbose)) {
+        cata_destroy(cat);
+        return NULL;
+      }
+      for (size_t n=0; n<cat->ndata[i]; n++) {
+        for (int k=0; k<3; k++){
+          if (cat->data[i][n].x[k]>=conf->bsize[k])
+            cat->data[i][n].x[k]-=conf->bsize[k];
+        }
+      }
+    }
     /* Read random catalog if necessary. */
     if (!conf->issim) {
       if (conf->verbose) {
